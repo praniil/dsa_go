@@ -19,7 +19,7 @@ func (list *LinkedList) insertItems(data int) {
 		list.head = newNode
 	} else {
 		current := list.head //we dont use the pointer head during the operation but we use a temp pointer i.e current because head should only point the first node
-		for newNode.nextNode != nil {
+		for current.nextNode != nil {
 			current = current.nextNode //p = p-> next
 		}
 		current.nextNode = newNode //last item ko paxadi newnode is made
@@ -35,11 +35,14 @@ func (list *LinkedList) display() {
 }
 
 func (list *LinkedList) traversing(action func(node *Node)) {
+	count := 0
 	current := list.head
 	for current != nil {
+		count++
 		action(current)
 		current = current.nextNode
 	}
+	fmt.Println("no of nodes: ", count)
 }
 
 func (list *LinkedList) search(data int) (bool, int) {
@@ -52,6 +55,18 @@ func (list *LinkedList) search(data int) (bool, int) {
 	}
 	return false, 0
 }
+
+// func (list *LinkedList) insertTop (data int) {
+// 	newNode := &Node{data: data}
+
+// 	if list.head == nil {
+// 		list.head = newNode
+// 	} else {
+// 		currentNode := list.head
+		
+
+// 	}
+// }
 
 func LLdisplay() {
 	var linkLis LinkedList
