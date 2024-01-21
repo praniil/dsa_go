@@ -11,6 +11,7 @@ type LinkedList struct {
 type Node struct {
 	data     int
 	nextNode *Node
+	prevNode *Node
 }
 
 func (list *LinkedList) insertItems(data int) {
@@ -63,22 +64,33 @@ func (list *LinkedList) search(data int) (bool, int) {
 // 		list.head = newNode
 // 	} else {
 // 		currentNode := list.head
-		
 
 // 	}
 // }
+
+func (list *LinkedList) insertBeginning(data int) {
+	newNode := &Node{data: data}
+	if list.head == nil {
+		list.head = newNode
+	} else {
+		newNode.nextNode = list.head
+		list.head = newNode
+	}
+
+}
 
 func LLdisplay() {
 	var linkLis LinkedList
 	linkLis.insertItems(25)
 	linkLis.insertItems(35)
+	linkLis.insertBeginning(15)
 	linkLis.display()
-	linkLis.traversing(func(node *Node) {
-		fmt.Printf("%d -> ", node.data)
-	})
+	// linkLis.traversing(func(node *Node) {
+	// 	fmt.Printf("%d -> ", node.data)
+	// })
 	result, value := linkLis.search(20)
 	if result == true {
-		fmt.Printf("%v. The value is: %d", result, value)
+		fmt.Printf("\n%v. The value is: %d", result, value)
 	} else {
 		fmt.Println("\nNOT FOUND")
 	}
