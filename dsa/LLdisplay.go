@@ -79,11 +79,24 @@ func (list *LinkedList) insertBeginning(data int) {
 
 }
 
+func (list *LinkedList) deleteNode(data int) {
+	current := list.head
+	for current.nextNode.data != data {
+		current = current.nextNode
+		if current.nextNode == nil {
+			fmt.Printf("%d not found!", data)
+		}
+	}
+	current.nextNode = current.nextNode.nextNode
+	current = current.nextNode
+}
+
 func LLdisplay() {
 	var linkLis LinkedList
 	linkLis.insertItems(25)
 	linkLis.insertItems(35)
 	linkLis.insertBeginning(15)
+	linkLis.deleteNode(2)
 	linkLis.display()
 	// linkLis.traversing(func(node *Node) {
 	// 	fmt.Printf("%d -> ", node.data)
