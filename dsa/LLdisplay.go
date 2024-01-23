@@ -79,6 +79,24 @@ func (list *LinkedList) insertBeginning(data int) {
 
 }
 
+func (list *LinkedList) insertAtSpecificPosition(data int, position int) {
+	newNode := &Node{data: data}
+	current := list.head
+	count := 0
+	if position == 0 {
+		newNode.nextNode = current
+		list.head = newNode
+		return
+	}
+	for current.nextNode != nil && count < position-1 {
+		current = current.nextNode
+		count++
+	}
+	tempNode := current.nextNode
+	current.nextNode = newNode
+	newNode.nextNode = tempNode
+}
+
 func (list *LinkedList) deleteNode(data int) {
 	current := list.head
 	for current.nextNode.data != data {
@@ -93,10 +111,16 @@ func (list *LinkedList) deleteNode(data int) {
 
 func LLdisplay() {
 	var linkLis LinkedList
+	linkLis.insertItems(15)
 	linkLis.insertItems(25)
 	linkLis.insertItems(35)
-	linkLis.insertBeginning(15)
-	linkLis.deleteNode(2)
+	linkLis.insertItems(45)
+	linkLis.insertItems(55)
+	linkLis.insertItems(65)
+	// linkLis.insertBeginning(15)
+	linkLis.insertAtSpecificPosition(200, 10)
+
+	// linkLis.deleteNode(2)
 	linkLis.display()
 	// linkLis.traversing(func(node *Node) {
 	// 	fmt.Printf("%d -> ", node.data)
