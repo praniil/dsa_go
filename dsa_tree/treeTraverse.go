@@ -31,6 +31,21 @@ func postOrderTraversal(node *Node) {
 	}
 }
 
+func searchNode(node *Node, data int) {
+	for node != nil {
+		if node.value == data {
+			fmt.Printf("Data found: %d\n", node.value)
+			return
+		} else if data > node.value {
+			node = node.Right
+		} else {
+			node = node.Left
+		}
+	}
+	fmt.Println("Not found")
+}
+
+
 func TreeTraverse() {
 	root := &Node{
 		value: 5,
@@ -55,4 +70,5 @@ func TreeTraverse() {
 	inOrderTraversal(root)
 	fmt.Println("PostOrder Traverse is:")
 	postOrderTraversal(root)
+	searchNode(root, 1)
 }
