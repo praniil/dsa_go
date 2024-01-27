@@ -64,6 +64,7 @@ func TreeTraverse() {
 			Right: nil,
 		},
 	}
+	
 	fmt.Println("PreOrder Traverse is:")
 	preOrderTraversal(root)
 	fmt.Println("InOrder Traverse is:")
