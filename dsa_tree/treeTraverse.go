@@ -45,6 +45,34 @@ func searchNode(node *Node, data int) {
 	fmt.Println("Not found")
 }
 
+func deleteNode(node *Node, key int) *Node{
+	if node == nil {
+		return nil
+	}
+	if key < node.value {
+		node.Left = deleteNode(node.Left, key)
+	} else if key > node.value {
+		node.Right = deleteNode(node.Right, key)
+	} else {
+		if node.Left == nil {
+			return node.Right
+		} else if node.Right == nil {
+			return node.Left
+		}
+
+		minNode := findMin(node.Right)
+		node.value = minNode.value
+		node.Right = deleteNode(node.Right, minNode.value)
+	}
+	return node
+}
+
+func findMin (node *Node) *Node {
+	for node.Left != nil {
+		node = node.Left
+	}
+	return node
+}
 
 func TreeTraverse() {
 	root := &Node{
@@ -72,4 +100,7 @@ func TreeTraverse() {
 	fmt.Println("PostOrder Traverse is:")
 	postOrderTraversal(root)
 	searchNode(root, 1)
+	searchNode(root, 8)
+	deleteNode(root, 8)
+	searchNode(root, 8)
 }
